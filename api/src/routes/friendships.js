@@ -15,11 +15,11 @@ router.get('/',async (req,res,next)=>{
         // console.log('idss',idfriendships)
         let person1= await Promise.all(
             idfriendships.map(async el=>{
-                console.log(el.person1id,'elemento')
+                // console.log(el.person1id,'elemento')
                 return await Users.findByPk(el.person1id)
             })
         )
-        
+        // console.log(person1);
         let person2= await Promise.all(
             idfriendships.map(async el=>{
                 return await Users.findByPk(el.person2id)
@@ -27,7 +27,7 @@ router.get('/',async (req,res,next)=>{
         )
 
         let friends= person1.map((el,index)=>{
-            return `${person1[index].name} es amigo de ${person2[index].name}`
+            return `${person1[index]?.name} es amigo de ${person2[index]?.name}`
         })
         res.status(200).json(friends)
     } catch (error) {
@@ -62,7 +62,7 @@ router.get('/:id',async(req,res,next)=>{
             })
         )
         let friends= users.map(el=>el.name  )
-        console.log(friends,'friends');
+        // console.log(friends,'friends');
         // console.log(allFriendsIds.dataValues)
     
         res.status(200).json(friends)

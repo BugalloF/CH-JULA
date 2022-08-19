@@ -18,7 +18,7 @@ router.get('/',async (req,res,next)=>{
 // entonces le pasamos el id de la persona y nos retorna las clases.
 router.get('/:id/lessons',async(req,res,next)=>{
     const {id}=req.params
-    console.log(id) 
+    // console.log(id) 
     try {
         let userLessons= await Lessons.findAll({
             where:{
@@ -26,7 +26,7 @@ router.get('/:id/lessons',async(req,res,next)=>{
             },
             attributes:['name']
         })
-        console.log(userLessons);
+        // console.log(userLessons);
         if(userLessons.length===0)return res.status(200).send('Este usuario no fue a clases')
         let lessonName= userLessons.map(el=>el.name)
         let orderLessons = {};
@@ -34,7 +34,7 @@ router.get('/:id/lessons',async(req,res,next)=>{
         lessonName.forEach(function(lesson){
         orderLessons[lesson] = (orderLessons[lesson] || 0) + 1;
 }); 
-console.log(orderLessons);
+// console.log(orderLessons);
         res.status(200).json(orderLessons)
     } catch (error) {
         
